@@ -1,19 +1,36 @@
 body{
-    height: 900px;
+    height: 957px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(rgb(62, 221, 221), rgb(240, 72, 164));
+}
+
+.calculator{
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.01);
+    border-radius: 12px;
+    box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255,255,255,0.5);
+    border-left: 1px solid rgba(255,255,255,0.5);
+
 }
 
 .screen{
-    border: 1px solid black;
-    height: 150px;
+    padding: 20px;
+    border: 0px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
 }
 
 .buttons{
-    border: 1px solid black;
+    border: 0px;
     border-top-width: 0;
     padding: 0px;
+    margin: 0;
     margin: 0;
     width: 300px;
     height: 320px;
@@ -25,6 +42,12 @@ button{
     padding: 0px;
     margin-bottom: 5px;
     border: 0;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+button:hover{
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 
@@ -52,4 +75,18 @@ button{
 
 .flex-row .equal{
     height: 125px;
+}
+
+.screen p, button{
+    font-family: 'Prompt';
+    font-size: 16px;
+    color: white;
+}
+
+.screen p{
+    font-size: 20px;
+}
+
+button{
+    background-color: rgba(255, 255, 255, 0);
 }
