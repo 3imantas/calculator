@@ -1,0 +1,55 @@
+body{
+    height: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen{
+    border: 1px solid black;
+    height: 150px;
+}
+
+.buttons{
+    border: 1px solid black;
+    border-top-width: 0;
+    padding: 0px;
+    margin: 0;
+    width: 300px;
+    height: 320px;
+}
+
+button{
+    width: 24%;
+    height: 60px;
+    padding: 0px;
+    margin-bottom: 5px;
+    border: 0;
+}
+
+
+.flex-column{ 
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.flex-row{
+    width: 100%;
+    display: flex;
+    gap: 4px;
+}
+
+.flex-column button{
+    width: 32%;
+}
+
+
+.flex-column button[value="0"]{
+    width: 66%;
+}
+
+.flex-row .equal{
+    height: 125px;
+}
