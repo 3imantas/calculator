@@ -42,67 +42,62 @@ function result(){
     }
 }
 
-digits.forEach((digit) => {
-    digit.addEventListener('click', () => {
-        if(operation != '')
-        {   
-            if(digit.textContent === '.'){
-                if(!secondOperand.includes('.')){
-                    secondOperand += digit.textContent;
-                    screen.textContent += digit.textContent;
-                }
-            }
-            else{
+function handleDigit(digit)
+{
+    if(operation != '')
+    {   
+        if(digit.textContent === '.'){
+            if(!secondOperand.includes('.')){
                 secondOperand += digit.textContent;
                 screen.textContent += digit.textContent;
             }
         }
-        else
-        {
-            if(digit.textContent === '.'){
-                if(!firstOperand.includes('.')){
-                    firstOperand += digit.textContent;
-                    screen.textContent += digit.textContent;
-                }
-            }
-            else{
+        else{
+            secondOperand += digit.textContent;
+            screen.textContent += digit.textContent;
+        }
+    }
+    else
+    {
+        if(digit.textContent === '.'){
+            if(!firstOperand.includes('.')){
                 firstOperand += digit.textContent;
                 screen.textContent += digit.textContent;
             }
         }
-        //console.log(firstOperand + ' ' + secondOperand);
-    });
-});
-
-operations.forEach((op) => {
-    op.addEventListener('click', () =>{
-        if(firstOperand != '' && operation == '')
-        {   
-            operation = op.textContent;
-            screen.textContent += op.textContent;
+        else{
+            firstOperand += digit.textContent;
+            screen.textContent += digit.textContent;
         }
-        if(secondOperand != '')
-        {
-            result();
-            operation = op.textContent;
-            screen.textContent += op.textContent;
-        }
-        //console.log(operation)
-    });
-});
+    }
+    //console.log(firstOperand + ' ' + secondOperand);
+}
 
-equal.addEventListener('click', result);
+function handleOperation(op)
+{
+    if(firstOperand != '' && operation == '')
+    {   
+        operation = op.textContent;
+        screen.textContent += op.textContent;
+    }
+    if(secondOperand != '')
+    {
+        result();
+        operation = op.textContent;
+        screen.textContent += op.textContent;
+    }
+}
 
-
-clear.addEventListener('click', () =>{
+function handleClear()
+{
     screen.textContent = '';
     firstOperand = '';
     secondOperand = '';
-    operation = '';
+    operation = '';    
+}
 
-});
-
-del.addEventListener('click', () =>{
+function handleDelete()
+{
     screen.textContent = screen.textContent.slice(0, -1);
 
     if(secondOperand != '')
@@ -115,13 +110,51 @@ del.addEventListener('click', () =>{
     }
     else{
         firstOperand = firstOperand.slice(0,-1);
-    }
+    }    
+}
+
+function playAudio()
+{
+    audio.currentTime = 0;
+    audio.play();
+}
+
+digits.forEach((digit) => {
+
+    const digitHandler =  () => handleDigit(digit);
+
+    digit.addEventListener('click', digitHandler);
+});
+
+operations.forEach((op) => {
+
+    const operationHandler = () => handleOperation(op);
+
+    op.addEventListener('click', operationHandler);
 });
 
 
+equal.addEventListener('click', result);
+
+clear.addEventListener('click', handleClear);
+
+del.addEventListener('click', handleDelete);
+
+1
 buttons.forEach((btn)=>{
     btn.addEventListener('click', ()=>{
-        audio.currentTime = 0;
-        audio.play();
+        playAudio();
     });
+});
+
+window.addEventListener('keydown', (e) => {
+    const key = document.querySelector('[data-key="'+ e.keyCode +'"]');
+
+    if(key.className != null) playAudio();
+    if(key.className == 'digits') handleDigit(key);
+    if(key.className == 'operation') handleOperation(key);
+    if(key.className == 'clear') handleClear();
+    if(key.className == 'backspace') handleDelete();
+    if(key.className == 'equal') result();
+
 });
